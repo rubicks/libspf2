@@ -1,0 +1,19 @@
+language: cpp
+
+before_install:
+  - echo "before install"
+  - whoami
+  - uname -a
+  - pwd
+  - lsb_release --all
+
+install:
+  - wget https://raw.githubusercontent.com/rubicks/autotoolme/master/autotoolme.sh && chmod u+x autotoolme.sh && sudo ./autotoolme.sh
+
+script:
+  - autoreconf -ivf .
+  - ./configure
+  - make
+  - make check
+  - make distcheck
+  - sudo make install
